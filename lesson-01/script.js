@@ -4,10 +4,10 @@
 //
 // Виведи на екран загальну кількість яблук та винограду. Різницю яблук та винограду.
 
-// const apples = 47;
-// const grapes = 135;
-// const total = ;
-// console.log(total)
+const apples = 47;
+const grapes = 135;
+const total = apples + grapes;
+console.log(total)
 // const diff = ;
 // console.log(diff)
 
