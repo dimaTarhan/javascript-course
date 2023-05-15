@@ -4,11 +4,11 @@
 //
 // Виведи на екран загальну кількість яблук та винограду. Різницю яблук та винограду.
 
-const apples = 47;
-const grapes = 135;
-const total = apples + grapes;
-console.log(total)
-// const diff = ;
+// const apples = 47;
+// const grapes = 135;
+// const total = apples + grapes;
+// console.log(total)
+// const diff = apples - grapes;
 // console.log(diff)
 
 // ## Example 2 - Комбіновані оператори
@@ -16,6 +16,9 @@ console.log(total)
 // Заміни вираз перевизначення комбінованим оператором `+=`.
 
 // let students = 100;
+// students += 50;
+// students -= 50;
+// students *= 2;
 // students = students + 50;
 // console.log(students);
 
@@ -24,7 +27,7 @@ console.log(total)
 // Розбери пріоритет операторів в інструкції привласнення значення змінної
 //   `result`.
 
-// const result = 108 + 223 - 2 * 5;
+// const result = 10 + 20 - 2 * 5;
 // console.log(result);
 
 // ## Example 4 - Клас Math
@@ -34,17 +37,20 @@ console.log(total)
 //   `Math.round()`. Перевір що буде в консолі при значеннях `27.3` та `27.9`.
 
 // const value = 27.5;
+// console.log(Math.floor(value));
+// console.log(Math.ceil(value));
+// console.log(Math.round(value));
 
 // ## Example 5 - Шаблонні рядки
 //
 // Склади фразу за допомогою шаблонних рядків `A has B bots in stock`, де A, B -
 // змінні вставлені в рядок.
 
-// const companyName = 'Cyberdyne Systems';
-// const repairBots = 150;
-// const defenceBots = 50;
-// const message = ``;
-// console.log(message); // "Cyberdyne Systems has 200 bots in stock"
+const companyName = 'Cyberdyne Systems';
+const repairBots = 150;
+const defenceBots = 50;
+const message = `${companyName} has ${repairBots + defenceBots} bots in stock`;
+console.log(message); // "Cyberdyne Systems has 200 bots in stock"
 
 // ## Example 6 - Методи рядків та чейнінг
 //
