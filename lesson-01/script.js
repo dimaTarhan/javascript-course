@@ -4,11 +4,11 @@
 //
 // Виведи на екран загальну кількість яблук та винограду. Різницю яблук та винограду.
 
-// const apples = 47;
+// const apples = 300;
 // const grapes = 135;
-// const total = ;
+// const total = apples + grapes;
 // console.log(total)
-// const diff = ;
+// const diff = apples - grapes;
 // console.log(diff)
 
 // ## Example 2 - Комбіновані оператори
@@ -16,7 +16,9 @@
 // Заміни вираз перевизначення комбінованим оператором `+=`.
 
 // let students = 100;
-// students = students + 50;
+
+//students = students + 50;
+// students *= 2;
 // console.log(students);
 
 // ## Example 3 - Пріоритет операторів
@@ -24,7 +26,7 @@
 // Розбери пріоритет операторів в інструкції привласнення значення змінної
 //   `result`.
 
-// const result = 108 + 223 - 2 * 5;
+// const result = 10 + 20 - 2 * 5;
 // console.log(result);
 
 // ## Example 4 - Клас Math
@@ -34,6 +36,9 @@
 //   `Math.round()`. Перевір що буде в консолі при значеннях `27.3` та `27.9`.
 
 // const value = 27.5;
+// console.log(Math.floor(value));
+// console.log(Math.ceil(value));
+// console.log(Math.round(value));
 
 // ## Example 5 - Шаблонні рядки
 //
@@ -43,7 +48,8 @@
 // const companyName = 'Cyberdyne Systems';
 // const repairBots = 150;
 // const defenceBots = 50;
-// const message = ``;
+// const message = companyName + ' has ' + (repairBots + defenceBots) + ' bots in stock';
+// const message = `${companyName} has ${repairBots + defenceBots} bots in stock`;
 // console.log(message); // "Cyberdyne Systems has 200 bots in stock"
 
 // ## Example 6 - Методи рядків та чейнінг
@@ -60,8 +66,17 @@
 
 // let weight = '88,3';
 // let height = '1.75';
-//
-// const bmi = ;
+// const newWeight = Number(weight.replace(',', '.'));
+// const newHeight = Number(height.replace(',', '.'));
+
+// console.log(newHeight);
+// console.log(typeof Number(weight));
+// console.log(Number(weight));
+// console.log(Number.parseFloat(weight));
+
+// const bmi = newWeight / Math.pow(newHeight, 2);
+// console.log(bmi);
+// console.log(bmi.toFixed(1));
 // console.log(bmi); // 28.8
 
 // ## Example 7 - Оператори порівняння та приведення типів
@@ -69,15 +84,17 @@
 // Яким буде результат виразів?
 
 // console.log(5 > 4);
-//
+
 // console.log(10 >= '7');
-//
+
 // console.log('2' > '12');
-//
+// console.log('2'.charCodeAt(0));
+// console.log('12'.charCodeAt(0));
+
 // console.log('2' < '12');
-//
+
 // console.log('4' == 4);
-//
+
 // console.log('6' === 6);
 //
 // console.log('false' === false);
@@ -130,9 +147,9 @@
 // скрипта для наступних значень змінної `incomingValue`: null, undefined, 0,
 //   false. Використовуй оператор `??` (nullish coalescing operator).
 
-// const incomingValue = 5;
+// const incomingValue = false;
 // const defaultValue = 10;
-// const value = incomingValue || defaultValue;
+// const value = incomingValue ?? defaultValue;
 // console.log(value);
 
 // ## Example 10 - Оператор % та методи рядків
