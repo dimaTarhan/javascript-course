@@ -12,3 +12,7 @@ git branch -r
 ```
 git checkout branchName
 ```
+
+### Стягнути актуальні зміни з віддаленого репозиторію
+
+git pull
