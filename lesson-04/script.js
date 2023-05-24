@@ -9,18 +9,20 @@
 // foo(20);
 // console.log(a);
 
+// Функція, яка не має return
 // const foo = function () {
 //   const a = 5;
 // }
 // console.log(foo());
 
-// foo(5);
 
-// const myVar = function (a) {
+// Різні варіанти оголошення функції
+// foo(5); // => так не працює. Виклик функції має бути після оголошення змінної
+// const foo = function (a) {
 //   console.log(a);
 // }
-// //
-// myVar(5);
+
+// foo(5); // => Так працює. Ініціалізація відбувається через ключове слово function
 // function foo(a) {
 //   console.log(a)
 // }
