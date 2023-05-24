@@ -1,3 +1,14 @@
+// // Коли не потрібно робити return
+// let a = 10;
+// function foo(b) {
+//   if (b > 10) {
+//     a = b;
+//   }
+// }
+//
+// foo(20);
+// console.log(a);
+
 // const foo = function () {
 //   const a = 5;
 // }
@@ -29,6 +40,13 @@
 //
 //   Індекс маси тіла необхідно округлити до однієї цифри після коми;
 
+// function calcBMI(weight, height) {
+//   const newWeight = Number(weight.replace(',', '.'));
+//   const newHeight = Number(height.replace(',', '.'));
+//
+//   return (newWeight / Math.pow(newHeight, 2)).toFixed(1);
+// }
+//
 // const bmi = calcBMI('88,3', '1.75');
 // console.log(bmi); // 28.8
 //
@@ -36,6 +54,9 @@
 //
 // Напиши функцію `min(a,b)`, яка повертає найменше з чисел `a` та `b`.
 //
+// function min(a, b) {
+//   return Math.min(a, b);
+// }
 // console.log(min(2, 5)); // 2
 // console.log(min(3, -1)); // -1
 // console.log(min(1, 1)); // 1
@@ -46,7 +67,28 @@
 // зі сторонами, значення яких будуть передані до параметра `dimensions` у вигляді
 // рядка. Значення гарантовано розділені пробілом.
 //
+// function getRectArea(dimensions) {
+//   const valuesArr = dimensions.split(' ');
+//   const width = Number(valuesArr[0]);
+//   const height = Number(valuesArr[1]);
+//
+//   return width * height;
+// }
 // console.log(getRectArea('8 11'));
+
+// function getRectArea(dimensions) {
+//   if (!dimensions) {
+//     return 'Error';
+//   }
+//
+//   const valuesArr = dimensions.split(' ');
+//   const width = Number(valuesArr[0]);
+//   const height = Number(valuesArr[1]);
+//
+//   return width * height;
+// }
+// console.log(getRectArea('8 11'));
+
 //
 // ## Example 4 - Логування елементів
 //
@@ -57,7 +99,11 @@
 //
 //   Наприклад для першого елемента масиву `['Mango', 'Poly', 'Ajax']` з індексом `0`
 // буде виведено `1 - Mango`, а для індексу 2 виведе `3 - Ajax`.
-//
+// function logItems(itemsArr) {
+//   for (let i = 0; i < itemsArr.length; i += 1) {
+//     console.log(`Element ${i + 1}: `, itemsArr[i]);
+//   }
+// }
 // logItems(['Mango', 'Poly', 'Ajax']);
 // logItems(['🍎', '🍇', '🍑', '🍌', '🍋']);
 //
@@ -68,7 +114,16 @@
 // рядки імен та телефонних номерів, розділені комами. Порядковий номер імен та
 // телефонів у рядках вказують на відповідність. Кількість імен та телефонів
 // гарантовано однакова.
+
+
+// function printContactsInfo(names, phones) {
+//   const namesArr = names.split(',');
+//   const phonesArr = phones.split(',');
 //
+//   for (let i = 0; i < namesArr.length; i += 1) {
+//     console.log(`${namesArr[i]}: `, phonesArr[i]);
+//   }
+// }
 // printContactsInfo(
 //   'Jacob,William,Solomon,Artemis',
 //   '89001234567,89001112233,890055566377,890055566300',
@@ -78,7 +133,21 @@
 //
 // Напиши функцію `findLargestNumber(numbers)`яка шукає найбільше число в
 // масиві.
+// function findLargestNumber(numbersArr) {
+//   let max;
 //
+//   for (let number of numbersArr) {
+//     if (max === undefined || number > max) {
+//       max = number
+//     }
+//   }
+//
+// // console.log(max);
+//
+//   return max;
+// }
+//
+// const maxValue = findLargestNumber([2, 17, 94, 1, 23, 37]);
 // console.log(findLargestNumber([2, 17, 94, 1, 23, 37])); // 94
 // console.log(findLargestNumber([49, 4, 7, 83, 12])); // 83
 //
@@ -86,16 +155,54 @@
 //
 // Напишіть функцію `calAverage()` яка приймає довільну кількість аргументів
 // і повертає їхнє середнє значення. Усі аргументи будуть лише числами.
+
+// function calAverage(...args) {
+//   console.log(args);
+//   let sum = 0;
 //
+//   for (let argument of args) {
+//     sum += argument;
+//   }
+//
+//   return sum / args.length;
+// }
 // console.log(calAverage(1, 2, 3, 4)); // 2.5
 // console.log(calAverage(14, 8, 2)); // 8
 // console.log(calAverage(27, 43, 2, 8, 36)); // 23.2
+
+// function calAverage() {
+//   console.log(arguments);
+//   let sum = 0;
+//
+//   for (let argument of arguments) {
+//     sum += argument;
+//   }
+//
+//   return sum / arguments.length;
+// }
+// console.log(calAverage(1, 2, 3, 4)); // 2.5
+// console.log(calAverage(14, 8, 2)); // 8
+// console.log(calAverage(27, 43, 2, 8, 36)); // 23.2
+
+
 //
 // ## Example 8 - Форматування часу
 //
 // Напиши функцію `formatTime(minutes)` яка переведе значення `minutes`
 // (кількість хвилин) у рядок у форматі годин та хвилин `HH:MM`.
+
+// function formatTime(timeInMinutes) {
+//   const hours = Math.floor(timeInMinutes / 60);
+//   const minutes = timeInMinutes % 60;
 //
+//   // const hoursString = hours < 10 ? `0${hours}` : hours;
+//   // const minutesString = minutes < 10 ? `0${minutes}` : minutes;
+//
+//   const hoursString = `${hours}`.padStart(2, 0);
+//   const minutesString = `${minutes}`.padStart(2, 0);
+//
+//   return `${hoursString}:${minutesString}`
+// }
 // console.log(formatTime(70)); // "01:10"
 // console.log(formatTime(450)); // "07:30"
 // console.log(formatTime(1441)); // "24:01"
@@ -110,14 +217,45 @@
 //
 // const courses = ['HTML', 'CSS', 'JavaScript', 'React', 'PostgreSQL'];
 //
+// function addCourse(name) {
+//   // if (courses.includes(name)) {
+//   //   console.log('Ви вже маєте такий курс');
+//   //   return;
+//   // }
+//   //
+//   // console.log('Hello');
+//
+//   if (courses.includes(name)) {
+//     console.log('Ви вже маєте такий курс');
+//   } else {
+//     courses.push(name);
+//   }
+// }
 // addCourse('Express');
-// console.log(courses); // ['HTML', 'CSS', 'JavaScript', 'React', 'PostgreSQL', 'Express']
-// addCourse('CSS'); // 'Ви вже маєте такий курс'
+// // console.log(courses); // ['HTML', 'CSS', 'JavaScript', 'React', 'PostgreSQL', 'Express']
+// // addCourse('CSS'); // 'Ви вже маєте такий курс'
 //
+// function removeCourse(name) {
+//   if (courses.includes(name)) {
+//     const courseIndex = courses.indexOf(name);
+//     courses.splice(courseIndex, 1);
+//   } else {
+//     console.log('Курс із таким ім\'ям не знайдено');
+//   }
+// }
 // removeCourse('React');
-// console.log(courses); // ['HTML', 'CSS', 'JavaScript', 'PostgreSQL', 'Express']
-// removeCourse('Vue'); // 'Курс із таким ім'ям не знайдено'
+// // console.log(courses); // ['HTML', 'CSS', 'JavaScript', 'PostgreSQL', 'Express']
+// //removeCourse('Vue'); // 'Курс із таким ім'ям не знайдено'
 //
+// function updateCourse(oldName, newName) {
+//   if (courses.includes(oldName)) {
+//     const courseIndex = courses.indexOf(oldName);
+//     courses.splice(courseIndex, 1, newName);
+//   } else {
+//     console.log('Курс із таким ім\'ям не знайдено');
+//   }
+// }
+// console.log(courses);
 // updateCourse('Express', 'NestJS');
 // console.log(courses); // ['HTML', 'CSS', 'JavaScript', 'PostgreSQL', 'NestJS']
 
