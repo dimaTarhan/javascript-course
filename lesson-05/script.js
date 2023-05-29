@@ -24,6 +24,8 @@
 //   for (let i = min; i <= max; i += 2) {
 //     // console.log(i);
 //     // console.log(arr.push(i));
+//     // arr.push(i) повертає довжину масиву
+//     // return припиняє виконання функції (і циклу відповідно) та повертає значення
 //     // return arr.push(i);
 //     // arr.push(i);
 //     // console.log(arr);
