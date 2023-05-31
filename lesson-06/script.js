@@ -90,19 +90,20 @@
 // Перепиши функцію так, щоб вона приймала один об'єкт параметрів замість набору
 // незалежних аргументів.
 //
-// function printContactsInfo(names, phones) {
+// function printContactsInfo(props) {
+//   const { names, phones } = props;
 //   const nameList = names.split(',');
 //   const phoneList = phones.split(',');
 //   for (let i = 0; i < nameList.length; i += 1) {
 //     console.log(`${nameList[i]}: ${phoneList[i]}`);
 //   }
 // }
-//
-// // Раніше було так
-// // printContactsInfo(
-// //   'Jacob,William,Solomon,Artemis',
-// //   '89001234567,89001112233,890055566377,890055566300',
-// // );
+// //
+// // // Раніше було так
+// printContactsInfo({
+//   names: 'Jacob,William,Solomon,Artemis',
+//   phones: '89001234567,89001112233,890055566377,890055566300',
+// });
 //
 //
 // ## Example 3 - Глибока деструктуризація
@@ -110,10 +111,11 @@
 // Перепиши функцію так, щоб вона приймала один об'єкт параметрів замість набору
 // незалежних аргументів.
 //
-// function getBotReport(companyName, repairBots, defenceBots) {
+// function getBotReport(props) {
+//   const { companyName, bots: { repair: repairBots, defence: defenceBots }} = props;
 //   return `${companyName} has ${repairBots + defenceBots} bots in stock`;
 // }
-//
+// //
 // // Раніше було так
 // // console.log(getBotReport('Cyberdyne Systems', 150, 50));
 //
@@ -134,6 +136,16 @@
 //   `companyName` та `stock` та виводила репорт про кількість товарів на складі будь-якої
 // компанії.
 //
+
+// function getStockReport(props) {
+//   const { companyName, stock } = props;
+//   let sum = 0;
+//   for (const stockValue of Object.values(stock)) { // масив чисел
+//     sum += stockValue;
+//   }
+//   return `${companyName} has ${sum} items in stock!`;
+// }
+
 // console.log(
 //   getStockReport({
 //     companyName: 'Cyberdyne Systems',
@@ -143,7 +155,7 @@
 //     },
 //   }),
 // ); // "Cyberdyne Systems has 200 items in stock"
-//
+
 // console.log(
 //   getStockReport({
 //     companyName: 'Belacci',
@@ -161,6 +173,19 @@
 // об'єкт контакту з доданими властивостями `id` та `createdAt`, а також `list` зі
 // значенням "default" якщо в `partialContact` немає такої властивості.
 //
+
+// let contactId = 0;
+// function createContact(props) {
+//   contactId += 1;
+//
+//   return {
+//     list: 'default',
+//     ...props,
+//     id: contactId,
+//     createdAt: Date.now(),
+//   }
+// }
+
 // console.log(
 //   createContact({
 //     name: 'Mango',
@@ -180,8 +205,20 @@
 // Напиши функцію `transformUsername(user)` так, щоб вона повертала новий об'єкт із властивістю
 //   `fullName`, замість `firstName` та `lastName`.
 //
+
+// function transformUsername(user) {
+//   const { firstName, lastName, ...otherParams } = user;
+//   console.log('Other Params: ', otherParams);
+//   const fullName = `${firstName} ${lastName}`;
+//
+//   return {
+//     fullName,
+//     ...otherParams
+//   }
+// }
+
 // console.log(
-//   transformId({
+//   transformUsername({
 //     id: 1,
 //     firstName: 'Jacob',
 //     lastName: 'Mercer',
@@ -189,9 +226,9 @@
 //     friendCount: 40,
 //   }),
 // );
-//
+
 // console.log(
-//   transformId({
+//   transformUsername({
 //     id: 2,
 //     firstName: 'Adrian',
 //     lastName: 'Cross',
@@ -199,3 +236,7 @@
 //     friendCount: 20,
 //   }),
 // );
+
+// const arr1 = [1,2,3,4];
+// const arr2 = [5,6,7,8];
+// console.log([...arr1, 333, ...arr2]);
