@@ -174,60 +174,54 @@
 
 
 // ПРИКЛАД З bind
-// const calculator = {
-//   // firstNumber: 0,
-//   // secondNumber: 0,
-//   read(firstNumber = 0, secondNumber = 0) {
-//     if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
-//       this.firstNumber = Number(firstNumber);
-//       this.secondNumber = Number(secondNumber);
-//     } else {
-//       alert('Введено невірні значення!')
-//     }
+const calculator = {
+  // firstNumber: 0,
+  // secondNumber: 0,
+  read(firstNumber = 0, secondNumber = 0) {
+    if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+      this.firstNumber = Number(firstNumber);
+      this.secondNumber = Number(secondNumber);
+    } else {
+      alert('Введено невірні значення!')
+    }
+
+    console.log(this.firstNumber, this.secondNumber);
+  },
+  // В КОЛБЕК Я ПЕРЕДАЮ ФУНКЦІЮ, ЯКА ПРАЦЮЄ ОБЄКТОМ calculator ЧЕРЕЗ this
+  add(callback) {
+    // console.log(this.hasOwnProperty('firstNumber'));
+    if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+      // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+      // В КОЛБЕК ФУНКЦІЇ Я ВИКОРИСТОВУЮ В this В ЯКОСТІ КОНТЕКСТУ ОБʼЄКТ calculator
+      return this.firstNumber + this.secondNumber + callback();
+    } else {
+      alert('Спочатку задайте значення калькулятора!')
+    }
+  },
+  mult() {
+    // console.log(this.hasOwnProperty('firstNumber'));
+    if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+      // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+      return this.firstNumber * this.secondNumber;
+    } else {
+      alert('Спочатку задайте значення калькулятора!')
+    }
+  },
+};
+
+// КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ ВИЗНАЧЕННЯ СЕРЕДНЬОГО АРЕФМЕТИЧНОГО
+function calcAverage() {
+  console.log('Context: ', this);
+  return (this.firstNumber + this.secondNumber) / 2;
+}
+
+// РОБЛЮ КОПІЮ ФУНКЦІЇ ТА ПРИВʼЯЗУЮ КОНТЕКСТ ДО ОБʼЄКТУ calculator
+const newFunc = calcAverage.bind(calculator);
+
 //
-//     console.log(this.firstNumber, this.secondNumber);
-//   },
-//   // В КОЛБЕК Я ПЕРЕДАЮ ФУНКЦІЮ, ЯКА ПРАЦЮЄ З ІНШИМ ОБЄКТОМ ЧЕРЕЗ this
-//   add(callback) {
-//     // console.log(this.hasOwnProperty('firstNumber'));
-//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
-//       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
-//       // В КОЛБЕК ФУНКЦІЇ Я ВИКОРИСТОВУЮ В this В ЯКОСТІ КОНТЕКСТУ ОБʼЄКТ НЕ calculator, А newObj
-//       return this.firstNumber + this.secondNumber + callback();
-//     } else {
-//       alert('Спочатку задайте значення калькулятора!')
-//     }
-//   },
-//   mult() {
-//     // console.log(this.hasOwnProperty('firstNumber'));
-//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
-//       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
-//       return this.firstNumber * this.secondNumber;
-//     } else {
-//       alert('Спочатку задайте значення калькулятора!')
-//     }
-//   },
-// };
-//
-// // ІНШИЙ ОБʼЄКТ, ПАРАМЕТРИ ЯКОГО Я БУДУ ВИКОРИСТОВУВАТИ
-// const newObj = {
-//   startSum: 5000,
-//   additionalSum: 1000,
-// }
-//
-// // КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ СУМИ ПАРАМЕТРІВ
-// function addTotalSum() {
-//   console.log('Context: ', this);
-//   return this.startSum + this.additionalSum;
-// }
-//
-// // РОБЛЮ КОПІЮ ФУНКЦІЇ ТА ПРИВʼЯЗУЮ КОНТЕКСТ ДО ОБʼЄКТУ newObj
-// const newFunc = addTotalSum.bind(newObj);
-//
-// //
-// calculator.read(1, 1);
-// // ПЕРЕДАЮ КОЛБЕК ФУНКЦІЮ В МЕТОД ОБʼЄКТУ calculator
-// console.log(calculator.add(newFunc));
-//
-// // В КОЛБЕК ФУНЦІЯХ КОНТЕКСТ НЕ ЗБЕРІГАЄТЬСЯ, ТОМУ В ТАКОМУ ВИПАДКУ this БУДЕ ВКАЗУВАТИ НА Window
-// console.log(calculator.add(addTotalSum))
+calculator.read(10, 20);
+// ПЕРЕДАЮ КОЛБЕК ФУНКЦІЮ В МЕТОД ОБʼЄКТУ calculator
+console.log(calculator.add(newFunc));
+
+// В КОЛБЕК ФУНЦІЯХ КОНТЕКСТ НЕ ЗБЕРІГАЄТЬСЯ, ТОМУ В ТАКОМУ ВИПАДКУ this БУДЕ ВКАЗУВАТИ НА Window
+console.log(calculator.add(calcAverage))
