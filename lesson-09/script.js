@@ -187,7 +187,7 @@ const calculator = {
 
     console.log(this.firstNumber, this.secondNumber);
   },
-  // В КОЛБЕК Я ПЕРЕДАЮ ФУНКЦІЮ, ЯКА ПРАЦЮЄ ОБЄКТОМ calculator ЧЕРЕЗ this
+  // В КОЛБЕК Я ПЕРЕДАЮ ФУНКЦІЮ, ЯКА ПРАЦЮЄ З ОБЄКТОМ calculator (ЗАВДЯКИ bind) ЧЕРЕЗ this
   add(callback) {
     // console.log(this.hasOwnProperty('firstNumber'));
     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
@@ -209,7 +209,7 @@ const calculator = {
   },
 };
 
-// КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ ВИЗНАЧЕННЯ СЕРЕДНЬОГО АРЕФМЕТИЧНОГО
+// КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ ВИЗНАЧЕННЯ СУМИ
 function calcSum() {
   console.log('Context: ', this);
   return this.firstNumber + this.secondNumber;
@@ -224,4 +224,5 @@ calculator.read(10, 20);
 console.log(calculator.add(newFunc));
 
 // В КОЛБЕК ФУНЦІЯХ КОНТЕКСТ НЕ ЗБЕРІГАЄТЬСЯ, ТОМУ В ТАКОМУ ВИПАДКУ this БУДЕ ВКАЗУВАТИ НА Window
+// САМЕ ТАКИЙ ВИПАДОК НАЙПОШИРЕНІШИЙ ДЛЯ ВИКОРИСТАННЯ МЕТОДУ bind
 console.log(calculator.add(calcSum))
