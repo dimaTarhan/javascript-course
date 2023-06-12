@@ -193,7 +193,7 @@ const calculator = {
     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
       // В КОЛБЕК ФУНКЦІЇ Я ВИКОРИСТОВУЮ В this В ЯКОСТІ КОНТЕКСТУ ОБʼЄКТ calculator
-      return this.firstNumber + this.secondNumber + callback();
+      return callback();
     } else {
       alert('Спочатку задайте значення калькулятора!')
     }
@@ -210,13 +210,13 @@ const calculator = {
 };
 
 // КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ ВИЗНАЧЕННЯ СЕРЕДНЬОГО АРЕФМЕТИЧНОГО
-function calcAverage() {
+function calcSum() {
   console.log('Context: ', this);
-  return (this.firstNumber + this.secondNumber) / 2;
+  return this.firstNumber + this.secondNumber;
 }
 
 // РОБЛЮ КОПІЮ ФУНКЦІЇ ТА ПРИВʼЯЗУЮ КОНТЕКСТ ДО ОБʼЄКТУ calculator
-const newFunc = calcAverage.bind(calculator);
+const newFunc = calcSum.bind(calculator);
 
 //
 calculator.read(10, 20);
@@ -224,4 +224,4 @@ calculator.read(10, 20);
 console.log(calculator.add(newFunc));
 
 // В КОЛБЕК ФУНЦІЯХ КОНТЕКСТ НЕ ЗБЕРІГАЄТЬСЯ, ТОМУ В ТАКОМУ ВИПАДКУ this БУДЕ ВКАЗУВАТИ НА Window
-console.log(calculator.add(calcAverage))
+console.log(calculator.add(calcSum))
