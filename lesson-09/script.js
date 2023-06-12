@@ -1,15 +1,16 @@
 // function showName(country, ...args) {
-//   console.log(args);
+//   //console.log(args);
+//   console.log(this);
 //   console.log(`${this.name}, welcome to ${country}`);
 // }
-//
+
 // const dimaObj = {
 //   name: 'Dima',
 //   showFriends(callback) {
 //     callback()
 //   }
 // }
-//
+
 // const vasiaObj = {
 //   name: 'Vasia'
 // }
@@ -18,10 +19,12 @@
 // showName.call(vasiaObj, 'USA');
 // showName.apply(dimaObj, ['Ukraine']);
 // const newFunc = showName.bind(vasiaObj, 'Ukraine');
-// newFunc('UK');
-//console.log(newFunc);
-//newFunc.call(vasiaObj, 'Ukraine');
-//dimaObj.showFriends(newFunc);
+// якщо не передавати обʼєкт, то він буде братися з контексту функції. в даному випадку - window
+// const newFunc = showName.bind();
+// newFunc('UK', 'Japan');
+// console.log(newFunc);
+// newFunc.call(vasiaObj, 'Ukraine');
+// dimaObj.showFriends(newFunc);
 
 // const myObj = {
 //   name: 'Dima',
@@ -98,10 +101,10 @@
 //     const newContact = {
 //       list: 'default',
 //       ...contact,
-//       id: generateId(),
-//       createdAt: getDate(),
+//       id: this.generateId(),
+//       createdAt: this.getDate(),
 //     };
-//     contacts.push(newContact);
+//     this.contacts.push(newContact);
 //   },
 //   generateId() {
 //     return '_' + Math.random().toString(36).substr(2, 9);
@@ -132,4 +135,99 @@
 // - `add()` - повертає суму збережених значень.
 // - `mult()` - перемножує збережені значення та повертає результат.
 //
-// const calculator = {};
+// const calculator = {
+//   // firstNumber: 0,
+//   // secondNumber: 0,
+//   read(firstNumber = 0, secondNumber = 0) {
+//     if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+//       this.firstNumber = Number(firstNumber);
+//       this.secondNumber = Number(secondNumber);
+//     } else {
+//       alert('Введено невірні значення!')
+//     }
+//
+//     console.log(this.firstNumber, this.secondNumber);
+//   },
+//   add() {
+//     // console.log(this.hasOwnProperty('firstNumber'));
+//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+//     // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+//       return this.firstNumber + this.secondNumber;
+//     } else {
+//       alert('Спочатку задайте значення калькулятора!')
+//     }
+//   },
+//   mult() {
+//     // console.log(this.hasOwnProperty('firstNumber'));
+//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+//       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+//       return this.firstNumber * this.secondNumber;
+//     } else {
+//       alert('Спочатку задайте значення калькулятора!')
+//     }
+//   },
+// };
+//
+// calculator.read(0, '20');
+// console.log(calculator.add());
+// console.log(calculator.mult());
+
+
+// ПРИКЛАД З bind
+// const calculator = {
+//   // firstNumber: 0,
+//   // secondNumber: 0,
+//   read(firstNumber = 0, secondNumber = 0) {
+//     if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+//       this.firstNumber = Number(firstNumber);
+//       this.secondNumber = Number(secondNumber);
+//     } else {
+//       alert('Введено невірні значення!')
+//     }
+//
+//     console.log(this.firstNumber, this.secondNumber);
+//   },
+//   // В КОЛБЕК Я ПЕРЕДАЮ ФУНКЦІЮ, ЯКА ПРАЦЮЄ З ІНШИМ ОБЄКТОМ ЧЕРЕЗ this
+//   add(callback) {
+//     // console.log(this.hasOwnProperty('firstNumber'));
+//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+//       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+//       // В КОЛБЕК ФУНКЦІЇ Я ВИКОРИСТОВУЮ В this В ЯКОСТІ КОНТЕКСТУ ОБʼЄКТ НЕ calculator, А newObj
+//       return this.firstNumber + this.secondNumber + callback();
+//     } else {
+//       alert('Спочатку задайте значення калькулятора!')
+//     }
+//   },
+//   mult() {
+//     // console.log(this.hasOwnProperty('firstNumber'));
+//     if (this.hasOwnProperty('firstNumber') && this.hasOwnProperty('secondNumber')) {
+//       // if ((this.firstNumber || this.firstNumber === 0) && (this.secondNumber || this.secondNumber === 0)) {
+//       return this.firstNumber * this.secondNumber;
+//     } else {
+//       alert('Спочатку задайте значення калькулятора!')
+//     }
+//   },
+// };
+//
+// // ІНШИЙ ОБʼЄКТ, ПАРАМЕТРИ ЯКОГО Я БУДУ ВИКОРИСТОВУВАТИ
+// const newObj = {
+//   startSum: 5000,
+//   additionalSum: 1000,
+// }
+//
+// // КОЛБЕК ФУНКЦІЯ, ЯКУ Я БУДУ ВИКОРИСТОВУВАТИ ДЛЯ СУМИ ПАРАМЕТРІВ
+// function addTotalSum() {
+//   console.log('Context: ', this);
+//   return this.startSum + this.additionalSum;
+// }
+//
+// // РОБЛЮ КОПІЮ ФУНКЦІЇ ТА ПРИВʼЯЗУЮ КОНТЕКСТ ДО ОБʼЄКТУ newObj
+// const newFunc = addTotalSum.bind(newObj);
+//
+// //
+// calculator.read(1, 1);
+// // ПЕРЕДАЮ КОЛБЕК ФУНКЦІЮ В МЕТОД ОБʼЄКТУ calculator
+// console.log(calculator.add(newFunc));
+//
+// // В КОЛБЕК ФУНЦІЯХ КОНТЕКСТ НЕ ЗБЕРІГАЄТЬСЯ, ТОМУ В ТАКОМУ ВИПАДКУ this БУДЕ ВКАЗУВАТИ НА Window
+// console.log(calculator.add(addTotalSum))
