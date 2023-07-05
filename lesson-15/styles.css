@@ -1,0 +1,43 @@
+.scroll {
+    max-width: 400px;
+    max-height: 400px;
+    overflow: auto;
+    padding: 16px;
+    border: 2px solid gray;
+}
+
+.article {
+    max-width: 500px;
+}
+
+.article img {
+    width: 100%;
+}
+
+.article h3:not(:first-child) {
+    margin-top: 50px;
+}
+
+.gallery img {
+    width: 400px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+form input {
+    margin-top: 10px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+form .error {
+    color: red;
+    margin-top: 4px;
+}
